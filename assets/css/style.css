@@ -1,0 +1,434 @@
+/* Global Styles */
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* ==== NAVBAR TRANG CHỦ ==== */
+.main-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 5;
+}
+
+.nav-container {
+  max-width: 1200px;          /* không cho sát mép màn hình */
+  margin: 0 auto;             /* căn giữa */
+  padding: 20px 32px;         /* khoảng cách trên/dưới & trái/phải */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo img {
+  height: 100px;
+  width: auto;
+  display: block;
+}
+
+/* Nhóm menu bên phải */
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 32px;                  /* các chữ cách đều nhau */
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #333;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.nav-link:hover {
+  color: #184d47;
+}
+
+/* Đang ở Home */
+.nav-link.active {
+  color: #184d47;
+  text-decoration: underline;
+}
+
+/* Nút Sign up dạng ôvan trắng, chữ xanh dương nhạt */
+.nav-signup {
+  padding: 8px 22px;
+  border-radius: 999px;
+  background-color: #ffffff;
+  color: #4a7aff;
+  border: 1px solid #e0e0e0;
+}
+
+.nav-signup:hover {
+  background-color: #f2f5ff;
+}
+
+/* ==== HOMEPAGE BACKGROUND ==== */
+/* LƯU Ý: CSS nằm ở assets/css, ảnh ở assets/img -> dùng ../img */
+.homepage {
+  width: 100%;
+  /* chiều cao = 16:9 theo chiều ngang màn hình */
+  height: calc(100vw * 9 / 16);
+  max-height: 100vh;              /* không cao hơn màn hình */
+  min-height: 480px;              /* để trên màn nhỏ không bị quá thấp (tùy)*/
+
+  background: url("../img/HomePageBackground.png") center/cover no-repeat;
+  position: relative;
+}
+
+
+/* Lớp phủ nhẹ cho chữ nhìn rõ hơn (nếu không cần có thể bỏ) */
+.homepage-overlay {
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0);  /* rất nhẹ cho ảnh vẫn rõ */
+  display: flex;
+  align-items: center;
+}
+
+/* === ALIGN TEXT THEO LOGO === */
+.homepage-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 32px;             /* TRÙNG NAV-CONTAINER */
+  width: 100%;
+  color: #333;
+}
+
+/* Sub + Title + Button */
+.homepage-subtitle {
+  font-size: 1.2rem;
+  letter-spacing: 0.2em;
+  color: #333;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.homepage-title {
+  font-size: 3rem;
+  max-width: 450px;
+  margin: 0 0 24px 0;
+  font-weight: 700;
+  color: #222;
+}
+
+.btn-see-more {
+  display: inline-block;
+  padding: 10px 28px;
+  border-radius: 999px;
+  background-color: #7cc6ff;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+}
+.btn-see-more:hover {
+  background-color: #4a9fe0;
+}
+
+
+/* Responsive nhỏ hơn */
+@media (max-width: 768px) {
+  .nav-container {
+    padding: 16px 16px;
+  }
+
+  .nav-menu {
+    gap: 16px;
+  }
+
+  .homepage-title {
+    font-size: 2.1rem;
+  }
+}
+
+/* ===== CONTACT PAGE LAYOUT ===== */
+
+.contact-page {
+  min-height: 100vh;
+  background: #ffffff;
+  padding-top: 90px;            /* chừa chỗ cho navbar fixed ở trên */
+}
+
+.contact-footer-section {
+  padding: 80px 0 40px;
+}
+
+.contact-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;              /* không sát mép trái/phải */
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  column-gap: 80px;
+  row-gap: 24px;
+  align-items: flex-start;
+}
+
+/* Cột brand bên trái */
+.contact-brand-name {
+  font-size: 1.7rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.contact-address {
+  color: #8d8d8d;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+/* Title cột */
+.contact-column-title {
+  color: #b0b0b0;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  margin-bottom: 16px;
+}
+
+/* Danh sách link */
+.contact-link-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.contact-link-list li + li {
+  margin-top: 12px;
+}
+
+.contact-link {
+  color: #111111;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.98rem;
+}
+
+.contact-link:hover {
+  text-decoration: underline;
+}
+
+/* Newsletter */
+.newsletter-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid #333333;
+  padding-bottom: 6px;
+  margin-top: 8px;
+}
+
+.newsletter-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 0.95rem;
+  padding: 4px 0;
+}
+
+.newsletter-input::placeholder {
+  color: #b0b0b0;
+}
+
+.newsletter-btn {
+  border: none;
+  background: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.newsletter-btn:hover {
+  text-decoration: underline;
+}
+
+/* Dòng cuối cùng */
+.contact-bottom-line {
+  border-top: 1px solid #e0e0e0;
+  margin-top: 40px;
+  padding-top: 16px;
+  font-size: 0.9rem;
+  color: #777777;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .contact-grid {
+    grid-template-columns: 1fr 1fr;
+    row-gap: 32px;
+  }
+}
+
+@media (max-width: 600px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-container {
+    padding: 0 16px;
+  }
+}
+
+/* ===== ADMIN COMMON ===== */
+.admin-page {
+  min-height: 100vh;
+  padding-top: 90px;              /* chừa chỗ cho header */
+  background: #ffffff;
+}
+
+.admin-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px 64px;
+}
+
+.admin-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.admin-subtitle {
+  color: #777;
+  margin-bottom: 32px;
+}
+
+/* Dashboard cards */
+.admin-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.admin-card {
+  display: block;
+  text-decoration: none;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 20px 24px;
+  color: #222;
+  background: #fafafa;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.admin-card h2 {
+  margin: 0 0 8px 0;
+  font-size: 1.2rem;
+}
+
+.admin-card p {
+  margin: 0;
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.admin-card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+  transform: translateY(-2px);
+}
+
+/* Table for contacts */
+.admin-table-wrapper {
+  overflow-x: auto;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+  font-size: 0.95rem;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+
+.admin-table th {
+  background: #fafafa;
+  font-weight: 600;
+}
+
+.status-select {
+  padding: 4px 6px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.btn-small {
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: none;
+  background: #ff6b6b;
+  color: white;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.btn-small:hover {
+  background: #e04848;
+}
+
+/* Manage info form */
+.admin-form {
+  max-width: 700px;
+}
+
+.admin-section-title {
+  margin-top: 32px;
+  margin-bottom: 12px;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 14px;
+}
+
+.form-row label {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.form-row input,
+.form-row textarea {
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 0.95rem;
+}
+
+.form-actions {
+  margin-top: 20px;
+}
+
+.btn-primary-save {
+  padding: 10px 22px;
+  border-radius: 999px;
+  border: none;
+  background: #184d47;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-primary-save:hover {
+  background: #276c66;
+}
+
+@media (max-width: 600px) {
+  .admin-container {
+    padding: 0 16px 48px;
+  }
+}
