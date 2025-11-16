@@ -9,21 +9,7 @@
 </head>
 <body>
 
-<header class="main-header">
-  <div class="nav-container">
-    <div class="nav-logo">
-      <img src="../assets/img/logo.png" alt="PhoneStore Logo">
-    </div>
-
-    <nav class="nav-menu">
-      <a href="home.php" class="nav-link">Home</a>
-      <a href="#" class="nav-link">Shop</a>
-      <a href="#" class="nav-link">About</a>
-      <a href="contact.php" class="nav-link">Contact</a>
-      <a href="#" class="nav-link nav-signup">Sign up</a>
-    </nav>
-  </div>
-</header>
+<?php include '../includes/header.php'?>
 
 <main class="admin-page">
   <div class="admin-container">
@@ -43,7 +29,16 @@
         <h2>Quản lý liên hệ khách hàng</h2>
         <p>Xem danh sách liên hệ, đánh dấu đã đọc / đã phản hồi, và xoá các liên hệ không cần thiết.</p>
       </a>
-    </div>
+      
+      <a href="manage_qna.php" class="admin-card">
+        <h2>Q&A page management</h2>
+        <p>View, add, delete and edit Q&A</p>
+      </a>
+
+      <a href="manage_about_info.php" class="admin-card">
+        <h2>About page management</h2>
+        <p>Change page contents like background image, text...</p>
+      </a>
 
   </div>
 </main>

@@ -19,24 +19,7 @@
 </head>
 <body>
 
-  <!-- Header / Navbar -->
-  <header class="main-header">
-    <div class="nav-container">
-      <!-- Logo bên trái -->
-      <div class="nav-logo">
-        <img src="../assets/img/logo.png" alt="PhoneStore Logo">
-      </div>
-
-      <!-- Menu bên phải -->
-      <nav class="nav-menu">
-        <a href="home.php" class="nav-link active">Home</a>
-        <a href="#" class="nav-link">Shop</a>
-        <a href="#" class="nav-link">About</a>
-        <a href="contact.php" class="nav-link">Contact</a>
-        <a href="#" class="nav-link nav-signup">Sign up</a>
-      </nav>
-    </div>
-  </header>
+  <?php include '../includes/header.php'?>
 
   <!-- HomePage Section -->
   <section class="homepage">
@@ -49,8 +32,7 @@
     </div>
   </section>
 
-  <!-- (Footer nếu cần) -->
-  <!-- <footer>...</footer> -->
+  <?php include '../includes/footer.php'?>
 
   <!-- JS Bootstrap nếu cần -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

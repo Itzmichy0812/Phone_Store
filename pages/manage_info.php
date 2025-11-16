@@ -9,21 +9,7 @@
 </head>
 <body>
 
-<header class="main-header">
-  <div class="nav-container">
-    <div class="nav-logo">
-      <img src="../assets/img/logo.png" alt="PhoneStore Logo">
-    </div>
-
-    <nav class="nav-menu">
-      <a href="home.php" class="nav-link">Home</a>
-      <a href="#" class="nav-link">Shop</a>
-      <a href="#" class="nav-link">About</a>
-      <a href="contact.php" class="nav-link">Contact</a>
-      <a href="#" class="nav-link nav-signup">Sign up</a>
-    </nav>
-  </div>
-</header>
+<?php include '../includes/header.php'?>
 
 <main class="admin-page">
   <div class="admin-container">
