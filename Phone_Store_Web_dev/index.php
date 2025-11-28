@@ -34,7 +34,10 @@ switch ($page) {
     case 'qna':
         include $viewFolder . 'qna.php';
         break;
-
+    
+    case 'post':
+        include $viewFolder . 'post.php';
+        break;
     // --- ADMIN SIDE ---
     case 'admin_dashboard':
         include $adminFolder . 'admin_dashboard.php';

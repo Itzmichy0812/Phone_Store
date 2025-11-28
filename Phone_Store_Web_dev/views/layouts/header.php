@@ -35,6 +35,7 @@ $cartCount = CartModel::getItemCount();
       <nav class="nav-menu">
         <a href="index.php?page=home" class="nav-link">Home</a>
         <a href="index.php?page=shop" class="nav-link">Shop</a>
+        <a href="index.php?page=post" class="nav-link">Post</a>
         <a href="index.php?page=about" class="nav-link">About</a>
         <a href="index.php?page=contact" class="nav-link">Contact</a>
         <a href="index.php?page=qna" class="nav-link">Q&A</a>
