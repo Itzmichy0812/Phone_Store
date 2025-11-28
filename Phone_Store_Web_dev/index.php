@@ -1,23 +1,53 @@
 <?php
-// index.php - Router đơn giản
+// index.php - Main router
+session_start();
+
 define('BASE_PATH', __DIR__);
 
-// 1. Lấy tham số "page" từ URL, mặc định là "home"
+// Include AuthController
+require_once __DIR__ . '/controllers/AuthController.php';
+$auth = new AuthController();
+
+// Include page/function restriction
+require_once __DIR__ . '/helpers/page_restriction.php';
+
+// 1. Get "page" parameter from URL, default to "home"
 $page = isset($_GET['page']) ? $_GET['page'] : 'home';
 
-// 2. Định nghĩa đường dẫn tới folder chứa Views
+// 2. Define folders for views
 $viewFolder = 'views/client/';
 $adminFolder = 'views/admin/';
 
-// 3. Điều hướng (Routing)
+// 3. Define public pages and restricted pages for specific users 
+$publicPages = ['login_signup'];
+
+$restrictedPages = ['contact'];
+
+// 4. Force login if NOT a guest
+if (!in_array($page, $publicPages)) {
+    if (!isset($_SESSION['user_id']) && !isset($_SESSION['is_guest'])) {
+        header("Location: index.php?page=login_signup");
+        exit();
+    }
+}
+
+// Only restrict guests from certain pages
+if (isset($_SESSION['is_guest']) && $_SESSION['is_guest'] === true) {
+    restrictPages($restrictedPages, 'guest');
+}
+
+// 6. Routing
 switch ($page) {
     // --- CLIENT SIDE ---
+    case 'login_signup':
+        include $viewFolder . 'login_signup.php';
+        break;
+
     case 'home':
         include $viewFolder . 'home.php';
         break;
-    
+
     case 'shop':
-        // Gọi Controller thay vì include file trực tiếp
         require_once 'controllers/ShopController.php';
         $controller = new ShopController();
         $controller->index();
@@ -35,33 +65,28 @@ switch ($page) {
         include $viewFolder . 'qna.php';
         break;
 
-    // --- ADMIN SIDE ---
-    case 'admin_dashboard':
-        include $adminFolder . 'admin_dashboard.php';
-        break;
-
-    case 'manage_about_info':
-        include $adminFolder . 'manage_about_info.php';
-        break;
-
-    case 'manage_contacts':
-        include $adminFolder . 'manage_contacts.php';
-        break;
-
-    case 'manage_qna':
-        include $adminFolder . 'manage_qna.php';
-        break;
-
-    case 'manage_info':
-        include $adminFolder . 'manage_info.php';
-        break;
-
-    
     case 'cart':
         include $viewFolder . 'cart.php';
         break;
-    
-    
+
+    case 'logout':
+        $auth->logout(); // This will destroy the session and redirect
+        break;
+
+    // --- ADMIN SIDE ---
+    case 'admin_dashboard':
+    case 'manage_about_info':
+    case 'manage_contacts':
+    case 'manage_qna':
+    case 'manage_info':
+        // Only allow admin users
+        if (!isset($_SESSION['is_admin']) || !$_SESSION['is_admin']) {
+            header("Location: index.php?page=home");
+            exit();
+        }
+        include $adminFolder . $page . '.php';
+        break;
+
     // --- 404 ERROR ---
     default:
         echo "<h1>404 - Page Not Found</h1>";

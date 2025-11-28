@@ -1,10 +1,15 @@
 <?php
-// Start session để lấy cart count
+// Start session to access user info and cart count
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+
 require_once 'models/CartModel.php';
 $cartCount = CartModel::getItemCount();
+
+// Check if user is logged in
+$isLoggedIn = isset($_SESSION['user_id']);
+$username = $isLoggedIn ? $_SESSION['username'] : null;
 ?>
 
 <!DOCTYPE html>
@@ -39,43 +44,78 @@ $cartCount = CartModel::getItemCount();
         <a href="index.php?page=contact" class="nav-link">Contact</a>
         <a href="index.php?page=qna" class="nav-link">Q&A</a>
         
-        <a href="index.php?page=admin_dashboard" class="nav-link text-danger fw-bold">Admin</a>
+        <!-- Admin link visible only for admin -->
+        <?php if ($isLoggedIn && isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1): ?>
+            <a href="index.php?page=admin_dashboard" class="nav-link text-danger fw-bold">Admin</a>
+        <?php endif; ?>
+
+        <!-- Cart dropdown -->
         <div class="cart-dropdown-wrapper">
+            <?php if (!$isLoggedIn): ?>
+                <!-- Guest: clicking icon redirects to login -->
+                <a href="index.php?page=login_signup" class="cart-icon-btn" 
+                onclick="alert('You must log in to access the cart'); return true;">
+                    <i class="bi bi-cart3"></i>
+                    <span class="cart-badge" id="cartBadge"><?= $cartCount ?></span>
+                </a>
+            <?php else: ?>
+                <!-- Logged-in user: normal dropdown button -->
                 <button class="cart-icon-btn" id="cartIconBtn" type="button">
                     <i class="bi bi-cart3"></i>
                     <span class="cart-badge" id="cartBadge"><?= $cartCount ?></span>
                 </button>
+            <?php endif; ?>
+            
+            <div class="cart-dropdown" id="cartDropdown">
+                <div class="cart-dropdown-header">
+                    <h6>Shopping Cart</h6>
+                    <span class="cart-item-count" id="cartItemCount"><?= $cartCount ?> items</span>
+                </div>
                 
-                <!-- Mini Cart Dropdown -->
-                <div class="cart-dropdown" id="cartDropdown">
-                    <div class="cart-dropdown-header">
-                        <h6>Shopping Cart</h6>
-                        <span class="cart-item-count" id="cartItemCount"><?= $cartCount ?> items</span>
+                <div class="cart-dropdown-body" id="cartDropdownBody">
+                    <div class="cart-empty-message">
+                        <i class="bi bi-cart-x"></i>
+                        <p>Your cart is empty</p>
                     </div>
-                    
-                    <div class="cart-dropdown-body" id="cartDropdownBody">
-                        <!-- Will be populated by JavaScript -->
-                        <div class="cart-empty-message">
-                            <i class="bi bi-cart-x"></i>
-                            <p>Your cart is empty</p>
-                        </div>
+                </div>
+                
+                <div class="cart-dropdown-footer">
+                    <div class="cart-total">
+                        <span>Total:</span>
+                        <strong id="cartTotalAmount">0.00</strong>
                     </div>
-                    
-                    <div class="cart-dropdown-footer">
-                        <div class="cart-total">
-                            <span>Total:</span>
-                            <strong id="cartTotalAmount">0.00</strong>
-                        </div>
-                        <div class="cart-actions">
-                            <a href="?page=cart" class="btn btn-outline">View Cart</a>
-                            <a href="?page=checkout" class="btn btn-primary">Checkout</a>
-                        </div>
+                    <div class="cart-actions">
+                        <a href="?page=cart" class="btn btn-outline">View Cart</a>
+                        <a href="?page=checkout" class="btn btn-primary">Checkout</a>
                     </div>
                 </div>
             </div>
-        <a href="#" class="nav-link nav-signup">Sign up</a>
+        </div>
+
+        <!-- Sign Up / Logout button -->
+        <?php if ($isLoggedIn): ?>
+            <a href="#" id="logout-btn" class="nav-link">Logout (<?= htmlspecialchars($username) ?>)</a>
+        <?php else: ?>
+            <a href="index.php?page=login_signup" class="nav-link nav-signup">Login</a>
+        <?php endif; ?>
       </nav>
     </div>
 </header>
 
 <script src="assets/javascript/cart.js"></script>
+
+<!-- Logout confirmation script -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const logoutBtn = document.getElementById('logout-btn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (confirm("Are you sure you want to logout?")) {
+                // Redirect to logout route
+                window.location.href = "index.php?page=logout";
+            }
+        });
+    }
+});
+</script>

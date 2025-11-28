@@ -1,4 +1,9 @@
-<?php include 'views/layouts/header.php'; ?>
+<?php 
+include 'views/layouts/header.php'; 
+
+// Check if user is logged in
+$isLoggedIn = isset($_SESSION['user_id']);
+?>
 
 <section class="shop-banner" style="background-image: url('assets/img/shop_banner.jpg');">
     <div class="shop-banner-content text-center">
@@ -239,10 +244,16 @@
                             <img src="<?php echo $imgUrl; ?>" alt="<?php echo $product['name']; ?>" class="product-img">
                             
                             <div class="product-overlay">
+                                <!-- Guest can see overlay buttons but click on "Add to cart" will redirect to login page -->
                                 <button class="overlay-btn add-to-cart-btn" 
-                                        data-product-id="<?= $product['id'] ?>"
-                                        data-quantity="1">
+
+                                <?php if(!$isLoggedIn): ?>
+                                    onclick="alert('You must log in to add items'); window.location='index.php?page=login_signup'; return false;"
+                                <?php else: ?>
+                                    data-product-id="<?= $product['id'] ?>" data-quantity="1"
+                                <?php endif; ?>>
                                     <i class="bi bi-cart-plus"></i> Add to cart
+                                    
                                 </button>
                                 <div class="product-actions">
                                     <a href="#" class="action-link">

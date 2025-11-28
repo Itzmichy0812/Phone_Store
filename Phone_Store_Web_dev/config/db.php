@@ -6,7 +6,7 @@ class Database {
     private $db_name = 'phone_shop'; // Tên database bạn tạo trong phpMyAdmin
     private $username = 'root';
     private $password = '';             // Để trống nếu XAMPP không đặt pass
-    private $port = '3307';             // <--- THÊM PORT 3307 TẠI ĐÂY
+    private $port = '3306';             // <--- THÊM PORT 3307 TẠI ĐÂY
 
     public $conn;
 
