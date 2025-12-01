@@ -152,6 +152,548 @@ html {
   }
 }
 
+/* ===== HOME FRAME 1 – GREETING ===== */
+
+.home-frame {
+  width: 100%;
+  /* chiều cao chuẩn 16:9 theo chiều ngang màn hình */
+  height: calc(100vw * 9 / 16);
+  max-height: 100vh;
+  min-height: 480px;        /* để laptop nhỏ không quá thấp */
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+
+/* Background khung 1 */
+.home-frame-1 {
+  background-image: url("../img/HomeBg1.png");
+  position: relative;
+  color: #ffffff;
+}
+
+/* lớp phủ nhẹ cho chữ rõ hơn (giống tone xanh đậm) */
+.home-frame-overlay {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(5, 10, 35, 0.8) 0%,
+    rgba(5, 10, 35, 0.3) 40%,
+    rgba(5, 10, 35, 0) 100%
+  );
+  display: flex;
+  align-items: center;
+}
+
+/* căn nội dung theo grid 1200px giống header/footer */
+.home-frame-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+  width: 100%;
+}
+
+/* Text greeting */
+.home-greeting-subtitle {
+  font-size: 1.2rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #c9d7ff;
+  margin-bottom: 12px;
+}
+
+.home-greeting-title {
+  font-size: 3.0rem;
+  font-weight: 700;
+  margin: 0 0 18px 0;
+}
+
+.home-greeting-text {
+  max-width: 520px;
+  font-size: 0.98rem;
+  line-height: 1.7;
+  color: #e1e8ff;
+  margin-bottom: 26px;
+}
+
+/* nút theo tone vàng/lam */
+.home-greeting-btn {
+  display: inline-block;
+  padding: 11px 32px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ffbf3f 0%, #ff7c4b 100%);
+  color: #0b1025;
+  text-decoration: none;
+  font-weight: 650;
+  font-size: 0.98rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.home-greeting-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* responsive nhỏ hơn */
+@media (max-width: 768px) {
+
+  .home-greeting-title {
+    font-size: 2.4rem;
+  }
+
+  .home-greeting-text {
+    font-size: 0.95rem;
+  }
+}
+
+/* ===== HOME FRAME 2 – INTRODUCTION ===== */
+
+.home-frame-2 {
+  background-image: url("../img/HomeBg2.png");
+  position: relative;
+  color: #ffffff;
+}
+
+/* lớp phủ rất nhẹ để chữ rõ hơn, vẫn giữ nền xanh */
+.home2-overlay {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(3, 10, 30, 0.7) 0%,
+    rgba(3, 10, 30, 0.3) 40%,
+    rgba(3, 10, 30, 0) 100%
+  );
+  display: flex;
+  align-items: center;
+}
+
+/* layout 2 cột: trái hình, phải chữ */
+.home2-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 64px;
+}
+
+.home2-left,
+.home2-right {
+  flex: 1;
+}
+
+/* PHONE POP-UP IMAGE */
+.home2-phone-wrapper {
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.home2-phone-img {
+  width: 100%;
+  display: block;
+  transform: scale(0.75);
+  opacity: 0;
+  filter: drop-shadow(0 18px 40px rgba(0, 0, 0, 0.7));
+  transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1),
+              opacity 0.6s ease-out;
+}
+
+/* khi frame 2 vào viewport -> pop up */
+.home2-phone-img.in-view {
+  opacity: 1;
+  transform: scale(0.92);
+}
+
+/* TEXT BLOCK BÊN PHẢI */
+.home2-subtitle {
+  font-size: 1.1rem;
+  letter-spacing: 0.25em;
+  text-transform: lowercase;
+  color: #a9c8ff;
+  margin-bottom: 10px;
+}
+
+.home2-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin: 0 0 18px 0;
+}
+
+.home2-text {
+  font-size: 0.98rem;
+  line-height: 1.8;
+  color: #dde7ff;
+  max-width: 460px;
+  margin-bottom: 10px;
+}
+
+/* nút learn more theo tone xanh dương */
+.home2-btn {
+  margin-top: 20px;
+  padding: 10px 30px;
+  border-radius: 999px;
+  border: none;
+  background: #1ea0ff;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-transform: lowercase;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+  transition: transform 0.18s ease, box-shadow 0.18s ease,
+              background 0.18s ease;
+}
+
+.home2-btn:hover {
+  background: #0f82d4;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.5);
+}
+
+/* Responsive frame 2 */
+@media (max-width: 992px) {
+  .home2-inner {
+    flex-direction: column;
+    gap: 32px;
+    text-align: center;
+  }
+
+  .home2-text {
+    max-width: none;
+  }
+
+  .home2-phone-wrapper {
+    max-width: 320px;
+  }
+}
+
+@media (max-width: 600px) {
+  .home2-inner {
+    padding: 0 16px;
+  }
+
+  .home2-title {
+    font-size: 2rem;
+  }
+
+  .home2-phone-wrapper {
+    max-width: 260px;
+  }
+}
+
+/* ===== HOME FRAME 3 – PREMIUM PRODUCTS ===== */
+
+.home-frame-3 {
+  background-image: url("../img/HomeBg3.png");
+  color: #ffffff;
+}
+
+/* lớp phủ nhẹ cho chữ rõ hơn, giữ nền xanh đậm */
+.home3-overlay {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(3, 8, 25, 0.9) 0%,
+    rgba(3, 8, 25, 0.7) 40%,
+    rgba(3, 8, 25, 0.0) 100%
+  );
+  display: flex;
+  align-items: center;
+}
+
+/* layout 2 cột: trái chữ, phải ảnh nền */
+.home3-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 60px;
+}
+
+.home3-left {
+  flex: 1;
+}
+
+.home3-right {
+  flex: 1;
+  /* trống, phần hình đã nằm trong background */
+}
+
+/* text */
+.home3-subtitle {
+  font-size: 1.1rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #9cc4ff;
+  margin-bottom: 10px;
+}
+
+.home3-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin: 0 0 18px 0;
+}
+
+.home3-text {
+  font-size: 0.98rem;
+  line-height: 1.8;
+  color: #dbe5ff;
+  max-width: 470px;
+  margin-bottom: 10px;
+}
+
+/* nút EXPLORE điều hướng về frame 1 */
+.home3-btn {
+  margin-top: 24px;
+  padding: 11px 34px;
+  border-radius: 999px;
+  border: none;
+  background: #ffffff;
+  color: #0b1b3a;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+  transition: transform 0.18s ease, box-shadow 0.18s ease,
+              background 0.18s ease, color 0.18s ease;
+}
+
+.home3-btn:hover {
+  background: #1ea0ff;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6);
+}
+
+/* Responsive frame 3 */
+@media (max-width: 992px) {
+  .home3-inner {
+    flex-direction: column;
+    gap: 32px;
+    text-align: center;
+  }
+
+  .home3-text {
+    max-width: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .home3-inner {
+    padding: 0 16px;
+  }
+
+  .home3-title {
+    font-size: 2rem;
+  }
+}
+
+/* ===== CONTACT PAGE – HERO ===== */
+
+.contact-hero {
+  width: 100%;
+  /* Tỉ lệ ~ 16:4 (4:1) – giống banner dài ngang, không quá cao */
+  height: calc(100vw * 4 / 16);
+  max-height: 320px;
+  min-height: 200px;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-hero-banner {
+  width: 100%;
+  height: 100%;
+  background: url("../img/ContactImg.png") center/cover no-repeat;
+}
+
+.contact-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-hero-inner {
+  max-width: 1200px;
+  width: 100%;
+  padding: 0 32px;
+  color: #ffffff;
+}
+
+.contact-hero-label {
+  font-size: 0.9rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  opacity: 0.9;
+}
+
+.contact-hero-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+}
+
+.contact-breadcrumb {
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.contact-breadcrumb a {
+  color: #ffffff;
+  text-decoration: none;
+  opacity: 0.9;
+}
+
+.contact-breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+/* ===== CONTACT PAGE – MAIN CONTENT ===== */
+
+.contact-main-section {
+  padding: 60px 0 80px;
+}
+
+.contact-main-header h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.contact-main-header p {
+  max-width: 600px;
+  margin: 0 auto 40px auto;
+  font-size: 0.95rem;
+  color: #8d8d8d;
+}
+
+/* 2 cột: info + form */
+.contact-main-grid {
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) 1.4fr;
+  gap: 60px;
+  align-items: flex-start;
+}
+
+.contact-info-column {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.contact-info-block {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.contact-info-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #f1e3c0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #b48c2b;
+  margin-top: 4px;
+}
+
+.contact-info-title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.contact-info-text {
+  font-size: 0.95rem;
+  color: #555555;
+}
+
+/* FORM SIDE */
+.contact-form-column {
+  background: #ffffff;
+}
+
+.contact-input {
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  padding: 10px 14px;
+  font-size: 0.95rem;
+}
+
+.contact-input:focus {
+  border-color: #b48c2b;
+  box-shadow: 0 0 0 0.15rem rgba(180, 140, 43, 0.25);
+}
+
+.contact-textarea {
+  resize: vertical;
+  min-height: 140px;
+}
+
+/* Submit button giống mẫu (icon màu nâu vàng) */
+.contact-submit-btn {
+  display: inline-block;
+  padding: 11px 40px;
+  border-radius: 999px;
+  border: none;
+  background: #b48c2b;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease,
+              box-shadow 0.15s ease;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.contact-submit-btn:hover {
+  background: #9a7621;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+}
+
+/* Responsive Contact layout */
+@media (max-width: 992px) {
+  .contact-main-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 600px) {
+  .contact-hero-inner {
+    padding: 0 16px;
+  }
+
+  .contact-main-header h2 {
+    font-size: 1.6rem;
+  }
+
+  .contact-main-header p {
+    padding: 0 16px;
+  }
+}
+
+
 /* ===== CONTACT PAGE LAYOUT ===== */
 
 .contact-page {
@@ -560,7 +1102,7 @@ html {
   resize: none;
 }
 
-/*----------------------- ABout page ------------------------*/
+/*----------------------- About page ------------------------*/
 /* About page specific */
 
 .about-section {
