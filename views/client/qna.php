@@ -5,20 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PhoneStore - Q&A</title>
   
-   <!-- Google Fonts (hoặc có thể bỏ nếu dùng font local) -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
-  <!-- Bootstrap -->
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
     rel="stylesheet"
   />
-  <link rel="stylesheet" href="../assets/css/style.css"/>
+  <link rel="stylesheet" href="assets/css/style.css"/>
 </head>
 
 <body>
 
-  <?php include '../includes/header.php'; ?>
+  <?php include 'views/layouts/header.php'; ?>
 
   <main class="qna-page-section">
     <div class="container-default">
@@ -50,10 +48,9 @@
     </div>
   </main>
 
-  <?php include '../includes/footer.php'?>
+  <?php include 'views/layouts/footer.php'; ?>
 
-  <!-- Custom JS -->
-  <script src="../javascript/qna_questionbox.js"></script>
+  <script src="assets/javascript/qna_questionbox.js"></script>
 
 </body>
 </html>

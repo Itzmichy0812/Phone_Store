@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PhoneStore - Manage Contacts</title>
 
-  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
 
-<?php include '../includes/header.php'?>
+<?php include 'views/layouts/header.php'; ?>
 
 <main class="admin-page">
   <div class="admin-container">
@@ -45,22 +45,7 @@
               <button class="btn-small btn-delete">Xoá</button>
             </td>
           </tr>
-          <tr>
-            <td>Trần Thị B</td>
-            <td>tranthib@example.com</td>
-            <td>Cửa hàng có giao hàng trong ngày không ạ?</td>
-            <td>
-              <select class="status-select">
-                <option value="unread">Chưa đọc</option>
-                <option value="read" selected>Đã đọc</option>
-                <option value="replied">Đã phản hồi</option>
-              </select>
-            </td>
-            <td>
-              <button class="btn-small btn-delete">Xoá</button>
-            </td>
-          </tr>
-        </tbody>
+          </tbody>
       </table>
     </div>
 
@@ -68,7 +53,7 @@
 </main>
 
 <script>
-// Xoá dòng liên hệ (demo phía client)
+// Script giữ nguyên vì là inline
 document.querySelectorAll('.btn-delete').forEach(btn => {
   btn.addEventListener('click', () => {
     if (confirm('Bạn có chắc muốn xoá liên hệ này?')) {

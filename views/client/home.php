@@ -19,7 +19,7 @@
 </head>
 <body>
 
-  <?php include '../includes/header.php'?>
+  <?php include 'views/layouts/header.php';?>
 
   <!-- HomePage Section -->
   <section class="homepage">
@@ -32,7 +32,7 @@
     </div>
   </section>
 
-  <?php include '../includes/footer.php'?>
+  <?php include 'views/layouts/footer.php';?>
 
   <!-- JS Bootstrap nếu cần -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
