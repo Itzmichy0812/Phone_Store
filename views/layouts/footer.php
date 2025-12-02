@@ -57,7 +57,12 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
+<<<<<<< HEAD
 <script src="assets/javascript/header.js"></script>
 <script src="assets/javascript/product_detail.js"></script>
 <script src="assets/javascript/cart.js"></script>
+=======
+<script src="assets/js/header.js"></script>
+
+>>>>>>> fix-huy-structure
 </body> </html> ```

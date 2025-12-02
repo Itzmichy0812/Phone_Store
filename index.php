@@ -94,6 +94,7 @@ switch ($page) {
 
     case 'logout':
         $auth->logout(); // This will destroy the session and redirect
+        break;
         
     // --- ADMIN SIDE ---
     case 'admin_dashboard':
@@ -111,7 +112,6 @@ switch ($page) {
 
     
         
-    
     
     
     // --- 404 ERROR ---
