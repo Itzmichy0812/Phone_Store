@@ -14,6 +14,13 @@ require_once '../models/CartModel.php';
 // Set JSON header
 header('Content-Type: application/json');
 
+error_log("Cart Handler Called - Action: " . ($_POST['action'] ?? 'none'));
+
+// Initialize cart if not exists
+if (!isset($_SESSION['cart'])) {
+    $_SESSION['cart'] = [];
+}
+
 // Get action from POST
 $action = $_POST['action'] ?? '';
 
@@ -27,24 +34,50 @@ switch ($action) {
     case 'add':
         $productId = $_POST['product_id'] ?? 0;
         $quantity = intval($_POST['quantity'] ?? 1);  // ✅ Lấy quantity từ request
+
+        error_log("ADD TO CART - Product ID: $productId, Quantity: $quantity");
         
         if ($productId > 0 && $quantity > 0) {
+            require_once '../models/ProductModel.php';
+            $productModel = new ProductModel($db);
+            $product = $productModel->getProductById($productId);
+        
+            if (!$product) {
+            echo json_encode([
+                'success' => false,
+                'message' => 'Product not found'
+            ]);
+            exit;
+            }
+
+
             // ✅ THAY ĐỔI: Thay vì cộng thêm, ta SET quantity mới
             if (isset($_SESSION['cart'][$productId])) {
                 // Nếu đã có trong cart, CỘNG THÊM quantity
                 $_SESSION['cart'][$productId]['quantity'] += $quantity;
+                error_log("Product exists, new total: " . $_SESSION['cart'][$productId]['quantity']);
             } else {
                 // Nếu chưa có, tạo mới với quantity từ request
                 $_SESSION['cart'][$productId] = [
-                    'product_id' => $productId,
+                    'id' => $product['id'],
+                    'name' => $product['name'],
+                    'price' => floatval($product['price']),
+                    'image' => $product['image'],
+                    'category' => $product['category'] ?? 'Uncategorized',
+                    'brand' => $product['brand'] ?? '',
+                    'stock' => intval($product['stock']),
                     'quantity' => $quantity
                 ];
+                error_log("New product added with quantity: $quantity");
             }
+
+            $itemCount = array_sum(array_column($_SESSION['cart'], 'quantity'));
+            error_log("Total items in cart: $itemCount");
             
             echo json_encode([
                 'success' => true,
                 'message' => 'Product added to cart',
-                'itemCount' => array_sum(array_column($_SESSION['cart'], 'quantity'))
+                'itemCount' => $itemCount
             ]);
         } else {
             echo json_encode(['success' => false, 'message' => 'Invalid product or quantity']);
@@ -63,6 +96,8 @@ switch ($action) {
                 unset($_SESSION['cart'][$productId]);
                 echo json_encode(['success' => true, 'message' => 'Item removed']);
             }
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Product not in cart']);
         }
         break;
     
@@ -70,8 +105,12 @@ switch ($action) {
         $productId = $_POST['product_id'] ?? 0;
         if (isset($_SESSION['cart'][$productId])) {
             unset($_SESSION['cart'][$productId]);
-        }
+        
         echo json_encode(['success' => true]);
+        }
+        else {
+            echo json_encode(['success' => false, 'message' => 'Product not in cart']);
+        }
         break;
     
     case 'get':

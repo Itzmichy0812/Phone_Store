@@ -1,9 +1,17 @@
 <?php
+session_start();
+require_once 'config/db.php';
+$database = new Database();
+$db = $database->connect();
+if (!$db) {
+    die("Database connection failed!");
+}
 // index.php - Router đơn giản
 define('BASE_PATH', __DIR__);
 
 // 1. Lấy tham số "page" từ URL, mặc định là "home"
 $page = isset($_GET['page']) ? $_GET['page'] : 'home';
+
 
 // 2. Định nghĩa đường dẫn tới folder chứa Views
 $controllerFolder = 'controllers/';
@@ -44,6 +52,16 @@ switch ($page) {
         require_once $controllerFolder . 'ProductController.php';
         $controller = new ProductController();
         $controller->show();
+        break;
+
+    case 'checkout':
+        require_once 'controllers/CheckoutController.php';
+        $controller = new CheckoutController($db);
+        $controller->index();
+        break;
+    
+    case 'order_success':
+        include 'views/client/order_success.php';
         break;
         
     // --- ADMIN SIDE ---

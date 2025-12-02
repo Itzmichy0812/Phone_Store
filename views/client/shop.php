@@ -237,15 +237,16 @@
                                     : 'assets/img/' . $product['image']; 
                             ?>
                             <<a href="?page=product&id=<?= $product['id'] ?>" class="product-image-link">
-                                <img src="<?= $imgUrl ?>" 
+                                <img src="<?= htmlspecialchars($imgUrl) ?>" 
                                     alt="<?= htmlspecialchars($product['name']) ?>" 
                                     class="product-img">
                              </a>
-                            
+                        
                             <div class="product-overlay">
                                 <button class="overlay-btn add-to-cart-btn" 
                                         data-product-id="<?= $product['id'] ?>"
-                                        data-quantity="1">
+                                        data-quantity="1"
+                                        title="Add to cart">
                                     <i class="bi bi-cart-plus"></i> Add to cart
                                 </button>
                                 <div class="product-actions">
@@ -370,12 +371,11 @@
         </div>
     </div>
 </section>
-
-<?php include 'views/layouts/footer.php'; ?>
-
 <script>
-function addToCart(productId) {
-    alert("Đã thêm sản phẩm ID " + productId + " vào giỏ! (Chức năng đang phát triển)");
-    // Sau này sẽ gọi AJAX ở đây
+// Placeholder
+function likeProduct(productId) {
+    alert('Wishlist feature coming soon!\nProduct ID: ' + productId);
 }
 </script>
+
+<?php include 'views/layouts/footer.php'; ?>

@@ -614,11 +614,20 @@ document.querySelector('.add-to-cart-btn').addEventListener('click', function() 
     
     // Call cart.js addToCart method
     if (typeof cart !== 'undefined') {
-        cart.addToCart(productId, quality);
+        cart.addToCart(productId, quantity, {
+            storage_id: storageId,
+            color_id: colorId,
+            ram_id: ramId
+        });
     } else {
         console.error('Cart object not found. Make sure cart.js is loaded.');
     }
 });
 </script>
 
+
+
 <?php include 'views/layouts/footer.php'; ?>
+
+
+<div data-base-price="<?= $product['price'] ?>" style="display:none;"></div>

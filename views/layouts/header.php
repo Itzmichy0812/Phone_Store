@@ -78,4 +78,3 @@ $cartCount = CartModel::getItemCount();
     </div>
 </header>
 
-<script src="assets/javascript/cart.js"></script>

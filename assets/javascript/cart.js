@@ -33,8 +33,41 @@ class ShoppingCart {
         });
         
         // Bind "Add to cart" buttons
-        this.bindAddToCartButtons();
+        
+
+        this.bindShopPageButtons();
+
     }
+
+    bindShopPageButtons() {
+        // Wait for DOM to be ready
+        setTimeout(() => {
+            // Only select buttons in product-card (shop grid)
+            const shopButtons = document.querySelectorAll('.product-card .add-to-cart-btn');
+            
+            console.log(`[Cart.js] Binding ${shopButtons.length} shop buttons`);
+            
+            shopButtons.forEach(btn => {
+                // Remove any existing listeners by cloning
+                const newBtn = btn.cloneNode(true);
+                btn.parentNode.replaceChild(newBtn, btn);
+                
+                // Add single event listener
+                newBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    const productId = newBtn.getAttribute('data-product-id');
+                    const quantity = newBtn.getAttribute('data-quantity') || 1;
+                    
+                    console.log(`[Cart.js] Shop button clicked: Product ${productId}, Qty ${quantity}`);
+                    
+                    this.addToCart(productId, quantity);
+                });
+            });
+        }, 100);
+    }
+
     
     /**
      * Toggle cart dropdown
@@ -50,34 +83,23 @@ class ShoppingCart {
         this.cartDropdown.classList.remove('show');
     }
     
-    /**
-     * Bind event cho tất cả nút "Add to cart"
-     */
-    bindAddToCartButtons() {
-        const addToCartBtns = document.querySelectorAll('.add-to-cart-btn');
-        
-        addToCartBtns.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                const productId = btn.getAttribute('data-product-id');
-                const quantity = btn.getAttribute('data-quantity') || 1;
-                
-                this.addToCart(productId, quantity);
-            });
-        });
-    }
+    
+
+
     
     /**
      * Thêm sản phẩm vào giỏ hàng (AJAX)
      */
     async addToCart(productId, quantity = 1) {
+        // ✅ Parse quantity thành số nguyên
         quantity = parseInt(quantity) || 1;
+        
+        const formData = new FormData();
+        formData.append('action', 'add');
+        formData.append('product_id', productId);
+        formData.append('quantity', quantity);  // ✅ Gửi đúng quantity
+        
         try {
-            const formData = new FormData();
-            formData.append('action', 'add');
-            formData.append('product_id', productId);
-            formData.append('quantity', quantity);
-            
             const response = await fetch('ajax/cart_handler.php', {
                 method: 'POST',
                 body: formData
@@ -86,23 +108,17 @@ class ShoppingCart {
             const data = await response.json();
             
             if (data.success) {
-                // Show success notification
-                this.showNotification('Product added to cart!', 'success');
-                
                 // Update mini cart
                 this.updateMiniCart();
                 
-                // Show dropdown
-                this.cartDropdown.classList.add('show');
-                
-                // Auto close after 3 seconds
-                setTimeout(() => this.closeDropdown(), 3000);
+                // Show success message
+                this.showNotification('Product added to cart!', 'success');
             } else {
-                this.showNotification(data.message || 'Error adding product!', 'error');
+                this.showNotification('Failed to add product', 'error');
             }
         } catch (error) {
-            console.error('Error:', error);
-            this.showNotification('Something went wrong!', 'error');
+            console.error('Error adding to cart:', error);
+            this.showNotification('Network error', 'error');
         }
     }
     

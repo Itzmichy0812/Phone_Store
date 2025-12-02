@@ -1612,7 +1612,9 @@ html {
 /* Related Products */
 .related-products-section .product-card {
     transition: all 0.3s ease;
-    border: 1px solid #e0e0e0;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    overflow: hidden;
 }
 
 .related-products-section .product-card:hover {
@@ -1621,12 +1623,46 @@ html {
 }
 
 .related-products-section .card-img-top {
+    width: 100%;
+    height: 250px;              /* chiều cao cố định */
+    object-fit: contain;        /* fit đủ trong khung, không crop */
+    background: #f8fafc;        /* nền sáng để dễ nhìn */
+    padding: 15px;              /* khoảng cách xung quanh ảnh */
     transition: transform 0.3s;
 }
 
 .related-products-section .product-card:hover .card-img-top {
     transform: scale(1.05);
 }
+
+.related-products-section .card-body {
+    padding: 16px;
+}
+
+.related-products-section .card-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 8px;
+    
+    /* Giới hạn 2 dòng */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 1.4;
+    height: 2.8em;  /* 2 lines */
+}
+
+.related-products-section .card-title a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.related-products-section .card-title a:hover {
+    color: #667eea;
+}
+
 
 /* Responsive */
 @media (max-width: 768px) {
@@ -1648,8 +1684,17 @@ html {
 }
 
 /* Giá chênh lệch trong nút storage */
+.variant-section .btn-group .btn-outline-primary {
+    border: 2px solid #dee2e6;
+    color: #495057;
+    transition: all 0.3s;
+    font-weight: 600;
+}
+
 .variant-section .btn-outline-primary small {
-    color: #16a34a;              /* xanh đậm hơn */
+    display: block;
+    margin-top: 4px;
+    color: #16a34a;              /* xanh lá đậm */
     font-weight: 700;
 }
 
@@ -1657,12 +1702,18 @@ html {
 .btn-check:checked + .btn-outline-primary {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     border-color: #667eea;
-    color: #fff;
+    color: white;
+    font-weight: 700;
 }
 
 /* Giá chênh lệch trong nút đang chọn – cho dễ đọc trên nền tím */
 .btn-check:checked + .btn-outline-primary small {
-    color: #b9fbc0;              /* xanh nhạt sáng hơn */
+    color: #ffffff !important;   /* trắng sáng, dễ đọc */
+}
+
+.variant-section .btn-outline-primary:hover:not(:has(.btn-check:checked)) {
+    border-color: #667eea;
+    background-color: rgba(102, 126, 234, 0.1);
 }
 
 .main-image-container {
@@ -1691,4 +1742,63 @@ html {
     height: 80px;
     object-fit: cover;       /* fill khung vuông */
     border-radius: 8px;
+}
+
+body {
+    padding-top: 80px; /* Adjust based on your header height */
+}
+
+/* Page hero section - ensure proper spacing */
+.page-hero {
+    margin-top: 0;
+    padding-top: 60px;
+    padding-bottom: 40px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    position: relative;
+}
+
+.page-hero .hero-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.page-hero .breadcrumb {
+    background: transparent;
+    margin-bottom: 0;
+}
+
+.page-hero .breadcrumb-item a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+}
+
+.page-hero .breadcrumb-item a:hover {
+    color: white;
+}
+
+.page-hero .breadcrumb-item.active {
+    color: white;
+}
+
+.page-hero .breadcrumb-item + .breadcrumb-item::before {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Header Section - ensure it's fixed properly */
+.header-section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* Navbar styling */
+.header-section .navbar {
+    padding: 1rem 0;
 }
