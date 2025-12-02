@@ -128,6 +128,7 @@ CREATE TABLE `admins` (
 CREATE TABLE `posts` (
   `id` int(11) NOT NULL,
   `admin_id` int(11) NOT NULL,
+  `category_id` int(11) DEFAULT NULL,
   `title` varchar(255) NOT NULL,
   `content` text NOT NULL,
   `image` varchar(255) DEFAULT NULL,
@@ -136,6 +137,35 @@ CREATE TABLE `posts` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `post_categories`
+--
+
+CREATE TABLE `post_categories` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `slug` varchar(100) NOT NULL,
+  `description` text DEFAULT NULL,
+  `color` varchar(7) DEFAULT NULL,
+  `display_order` int(11) DEFAULT 0,
+  `status` enum('active','inactive') DEFAULT 'active',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `post_categories`
+--
+
+INSERT INTO `post_categories` (`id`, `name`, `slug`, `description`, `color`, `display_order`, `status`) VALUES
+(1, 'Tin tức công nghệ', 'tech-news', 'Tin tức mới nhất về công nghệ và điện thoại', '#3B82F6', 1, 'active'),
+(2, 'Đánh giá sản phẩm', 'product-reviews', 'Đánh giá chi tiết các sản phẩm điện thoại', '#10B981', 2, 'active'),
+(3, 'Hướng dẫn sử dụng', 'tutorials', 'Hướng dẫn sử dụng và mẹo vặt', '#F59E0B', 3, 'active'),
+(4, 'So sánh sản phẩm', 'comparisons', 'So sánh các sản phẩm với nhau', '#8B5CF6', 4, 'active'),
+(5, 'Khuyến mãi', 'promotions', 'Thông tin về các chương trình khuyến mãi', '#EF4444', 5, 'active'),
+(6, 'Sự kiện', 'events', 'Tin tức về các sự kiện ra mắt sản phẩm', '#EC4899', 6, 'active');
 
 -- --------------------------------------------------------
 
@@ -244,8 +274,18 @@ ALTER TABLE `order_items`
 ALTER TABLE `posts`
   ADD PRIMARY KEY (`id`),
   ADD KEY `admin_id` (`admin_id`),
+  ADD KEY `category_id` (`category_id`),
   ADD KEY `status` (`status`),
   ADD KEY `created_at` (`created_at`);
+
+--
+-- Chỉ mục cho bảng `post_categories`
+--
+ALTER TABLE `post_categories`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `slug` (`slug`),
+  ADD KEY `status` (`status`),
+  ADD KEY `display_order` (`display_order`);
 
 --
 -- Chỉ mục cho bảng `post_reactions`
@@ -317,6 +357,12 @@ ALTER TABLE `posts`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT cho bảng `post_categories`
+--
+ALTER TABLE `post_categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT cho bảng `post_reactions`
 --
 ALTER TABLE `post_reactions`
@@ -361,7 +407,8 @@ ALTER TABLE `order_items`
 -- Các ràng buộc cho bảng `posts`
 --
 ALTER TABLE `posts`
-  ADD CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`admin_id`) REFERENCES `admins` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`admin_id`) REFERENCES `admins` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `posts_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `post_categories` (`id`) ON DELETE SET NULL;
 
 --
 -- Các ràng buộc cho bảng `post_reactions`

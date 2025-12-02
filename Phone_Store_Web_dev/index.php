@@ -36,8 +36,17 @@ switch ($page) {
         break;
     
     case 'post':
-        include $viewFolder . 'post.php';
+        require_once 'controllers/PostController.php';
+        $controller = new PostController();
+        $controller->index();
         break;
+    
+    case 'post_detail':
+        require_once 'controllers/PostController.php';
+        $controller = new PostController();
+        $controller->detail();
+        break;
+    
     // --- ADMIN SIDE ---
     case 'admin_dashboard':
         include $adminFolder . 'admin_dashboard.php';
