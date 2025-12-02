@@ -1,4 +1,6 @@
-<?php include 'views/layouts/header.php'; ?>
+<?php include 'views/layouts/header.php';
+$isLoggedIn = isset($_SESSION['user_id']);
+?>
 
 <section class="shop-banner" style="background-image: url('assets/img/shop_banner.jpg');">
     <div class="shop-banner-content text-center">

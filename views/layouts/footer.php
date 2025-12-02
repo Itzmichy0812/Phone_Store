@@ -26,9 +26,9 @@
       <div>
         <div class="contact-column-title">Help</div>
         <ul class="contact-link-list">
-          <li><a class="contact-link" href="#">Payment Options</a></li>
-          <li><a class="contact-link" href="#">Returns</a></li>
-          <li><a class="contact-link" href="#">Privacy Policies</a></li>
+          <li><a class="contact-link" href="index.php?page=qna">Payment Options</a></li>
+          <li><a class="contact-link" href="index.php?page=qna">Returns</a></li>
+          <li><a class="contact-link" href="index.php?page=qna">Privacy Policies</a></li>
         </ul>
       </div>
 

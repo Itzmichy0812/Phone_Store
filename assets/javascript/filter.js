@@ -1,4 +1,4 @@
-<script>
+
 document.addEventListener('DOMContentLoaded', function() {
     // Đếm số lượng filter đang active
     function countActiveFilters() {
@@ -43,4 +43,4 @@ document.addEventListener('DOMContentLoaded', function() {
     //     offcanvas?.hide();
     // });
 });
-</script>
+
